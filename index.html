@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 7A — Mentor Portal | GMUPS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f172a;--ink2:#1e293b;--ink3:#475569;--ink4:#94a3b8;
+  --bg:#f1f5f9;--card:#ffffff;--border:#e2e8f0;
+  --indigo:#4f46e5;--indigo-d:#3730a3;--indigo-l:#eef2ff;--indigo-m:#818cf8;
+  --green:#16a34a;--green-l:#dcfce7;--green-d:#14532d;
+  --red:#dc2626;--red-l:#fee2e2;--red-d:#7f1d1d;
+  --amber:#d97706;--amber-l:#fef3c7;--amber-d:#78350f;
+  --blue:#0284c7;--blue-l:#e0f2fe;--blue-d:#0c4a6e;
+  --purple:#7c3aed;--purple-l:#ede9fe;
+  --teal:#0891b2;--teal-l:#cffafe;
+  --pink:#db2777;--pink-l:#fce7f3;
+  --r:14px;--r-sm:8px;--r-xs:6px;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --sh2:0 4px 20px rgba(79,70,229,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:14px}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,#312e81 0%,#4f46e5 50%,#6366f1 100%);
+  color:#fff;padding:0 20px;position:sticky;top:0;z-index:200;
+  box-shadow:0 4px 24px rgba(49,46,129,.4)
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:58px}
+.header-left{display:flex;flex-direction:column;gap:1px}
+.school-name{font-size:10px;font-weight:500;opacity:.75;letter-spacing:.8px;text-transform:uppercase}
+.class-title{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;letter-spacing:-.3px}
+.header-right{display:flex;align-items:center;gap:10px}
+.hdr-badge{background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600}
+.hdr-date{font-size:11px;opacity:.8;font-weight:500}
+
+/* ── NAV ── */
+.nav-wrap{background:#fff;border-bottom:1.5px solid var(--border);position:sticky;top:58px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;gap:6px;padding:13px 16px;font-size:12.5px;font-weight:500;cursor:pointer;white-space:nowrap;color:var(--ink3);border-bottom:2.5px solid transparent;transition:.18s;position:relative}
+.tab:hover{color:var(--indigo);background:#f8faff}
+.tab.active{color:var(--indigo);border-bottom-color:var(--indigo);font-weight:600;background:#f8faff}
+.tab-icon{font-size:15px}
+.tab-dot{width:6px;height:6px;background:var(--red);border-radius:50%;position:absolute;top:10px;right:10px}
+
+/* ── MAIN ── */
+.main{padding:20px 16px;max-width:980px;margin:0 auto}
+.section{display:none}.section.active{display:block}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--ink2)}
+.card-icon{width:30px;height:30px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+
+/* ── DASHBOARD STAT CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:16px;box-shadow:var(--sh);position:relative;overflow:hidden;cursor:pointer;transition:.18s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.stat-card.c-indigo::before{background:var(--indigo)}
+.stat-card.c-green::before{background:var(--green)}
+.stat-card.c-red::before{background:var(--red)}
+.stat-card.c-amber::before{background:var(--amber)}
+.stat-card.c-blue::before{background:var(--blue)}
+.stat-card.c-purple::before{background:var(--purple)}
+.stat-card.c-teal::before{background:var(--teal)}
+.stat-card.c-pink::before{background:var(--pink)}
+.stat-icon{font-size:22px;margin-bottom:8px}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:11px;color:var(--ink4);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.stat-sub{font-size:11px;margin-top:6px;font-weight:500}
+.c-indigo .stat-num{color:var(--indigo)}
+.c-green .stat-num{color:var(--green)}
+.c-red .stat-num{color:var(--red)}
+.c-amber .stat-num{color:var(--amber)}
+.c-blue .stat-num{color:var(--blue)}
+.c-purple .stat-num{color:var(--purple)}
+.c-teal .stat-num{color:var(--teal)}
+.c-pink .stat-num{color:var(--pink)}
+
+/* ── PERFORMANCE SCORE CARDS ── */
+.perf-score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.perf-score-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:16px;box-shadow:var(--sh);text-align:center}
+.pscore-circle{width:70px;height:70px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Space Grotesk',sans-serif}
+.pscore-num{font-size:20px;font-weight:700;line-height:1}
+.pscore-max{font-size:10px;font-weight:500;opacity:.8}
+.pscore-label{font-size:12px;font-weight:600;color:var(--ink2)}
+.pscore-sub{font-size:11px;color:var(--ink4);margin-top:2px}
+
+/* ── MARK DASHBOARD ── */
+.mark-dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+.mark-subject-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:14px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:12px}
+.ms-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ms-info{flex:1}
+.ms-name{font-size:12px;font-weight:600;color:var(--ink2)}
+.ms-scores{font-size:11px;color:var(--ink3);margin-top:2px}
+.ms-avg{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700}
+.ms-bar-wrap{background:var(--bg);border-radius:20px;height:5px;margin-top:6px;overflow:hidden}
+.ms-bar{height:5px;border-radius:20px;transition:.4s}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s;font-family:inherit}
+.btn:hover{filter:brightness(.93)}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--indigo);color:#fff}
+.btn-green{background:var(--green);color:#fff}
+.btn-red{background:var(--red);color:#fff}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-outline{background:#fff;color:var(--indigo);border:1.5px solid var(--indigo)}
+.btn-ghost{background:var(--indigo-l);color:var(--indigo)}
+.btn-sm{padding:5px 11px;font-size:12px;border-radius:var(--r-xs)}
+.btn-xs{padding:3px 8px;font-size:11px;border-radius:5px}
+
+/* ── FORM ELEMENTS ── */
+input[type=text],input[type=number],input[type=date],select,textarea{
+  border:1.5px solid var(--border);border-radius:var(--r-sm);padding:8px 11px;
+  font-family:inherit;font-size:13px;color:var(--ink);background:#fff;
+  transition:.15s;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+textarea{resize:vertical}
+
+/* ── STUDENTS ── */
+.stu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px;margin-top:12px}
+.stu-chip{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 11px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px;transition:.15s}
+.stu-chip:hover{border-color:var(--indigo);background:var(--indigo-l)}
+.stu-roll{background:var(--indigo);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;flex-shrink:0}
+
+/* ── ATTENDANCE ── */
+.att-tool-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.att-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px}
+.att-item{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:9px 11px;background:var(--bg);transition:.2s}
+.att-item.present{background:#dcfce7;border-color:#86efac}
+.att-item.absent{background:#fee2e2;border-color:#fca5a5}
+.att-item.late{background:#fef3c7;border-color:#fcd34d}
+.att-name{font-size:12px;font-weight:500;flex:1}
+.att-btns{display:flex;gap:3px}
+.att-btn{border:none;border-radius:5px;width:26px;height:22px;font-size:11px;font-weight:700;cursor:pointer;transition:.12s}
+.ab-p{background:#16a34a;color:#fff}.ab-a{background:#dc2626;color:#fff}.ab-l{background:#d97706;color:#fff}
+.att-stat-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.astat{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 16px;text-align:center;min-width:70px}
+.astat .n{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700}
+.astat .l{font-size:10px;color:var(--ink4);font-weight:600;text-transform:uppercase}
+.astat.p .n{color:var(--green)}.astat.a .n{color:var(--red)}.astat.lv .n{color:var(--amber)}.astat.pct .n{color:var(--indigo)}
+
+/* ── HW / ASSIGN ── */
+.task-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:4px}
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:7px;margin-top:12px}
+.check-item{display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:8px 10px;font-size:12px;background:var(--bg);cursor:pointer;transition:.15s}
+.check-item.done{background:#dcfce7;border-color:#86efac;color:var(--green-d)}
+.check-item.not-done{background:#fee2e2;border-color:#fca5a5;color:var(--red-d)}
+.check-item input[type=checkbox]{width:15px;height:15px;accent-color:var(--indigo)}
+.task-progress{display:flex;align-items:center;gap:8px;margin-top:10px}
+.tpb{flex:1;background:var(--border);border-radius:20px;height:6px;overflow:hidden}
+.tpb-fill{height:6px;border-radius:20px;background:var(--green);transition:.4s}
+.tpb-txt{font-size:11px;font-weight:600;color:var(--ink3)}
+
+/* ── CLASS TEST ── */
+.test-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:4px}
+.marks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:12px}
+.mark-item{display:flex;align-items:center;gap:9px;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:8px 11px;background:var(--bg)}
+.mark-item .mn{font-size:12px;font-weight:500;flex:1}
+.mark-inp{width:58px;border:1.5px solid var(--border);border-radius:var(--r-xs);padding:5px 8px;font-size:13px;font-weight:600;text-align:center;font-family:inherit;color:var(--ink)}
+.mark-inp:focus{outline:none;border-color:var(--indigo)}
+.grade-pill{min-width:28px;text-align:center;font-size:11px;font-weight:700;border-radius:12px;padding:2px 7px}
+.gA{background:#dcfce7;color:#14532d}.gB{background:#fef3c7;color:#78350f}.gC{background:#fee2e2;color:#7f1d1d}
+.test-avg-row{display:flex;align-items:center;gap:12px;padding:10px 0 0;border-top:1px solid var(--border);margin-top:10px;font-size:12px}
+
+/* ── BEHAVIOUR ── */
+.beh-tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.btag{padding:6px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:.15s;user-select:none}
+.btag.pos{background:#dcfce7;color:#14532d;border-color:#86efac}
+.btag.neg{background:#fee2e2;color:#7f1d1d;border-color:#fca5a5}
+.btag.pos.sel{background:#16a34a;color:#fff;border-color:#16a34a}
+.btag.neg.sel{background:#dc2626;color:#fff;border-color:#dc2626}
+.beh-entry{border-left:3px solid var(--indigo);padding:10px 13px;margin-bottom:8px;background:var(--bg);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:12px}
+.beh-meta{font-weight:600;color:var(--indigo);margin-bottom:4px;font-size:11px}
+.bpill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:10px;font-weight:600;margin:2px 3px 2px 0}
+.bpill.pos{background:#dcfce7;color:#14532d}.bpill.neg{background:#fee2e2;color:#7f1d1d}
+
+/* ── MENTORING ── */
+.ment-areas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ment-area label{font-size:11px;font-weight:600;color:var(--ink3);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.ment-area textarea{width:100%;height:72px;font-size:12px}
+.ment-entry{border-left:3px solid var(--purple);padding:10px 14px;margin-bottom:8px;background:var(--bg);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:12px}
+.ment-meta{font-weight:600;color:var(--purple);margin-bottom:6px;font-size:11px}
+.ment-row{margin-bottom:4px}
+.ment-row b{color:var(--ink2)}
+
+/* ── PERFORMANCE TAB ── */
+.perf-section-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--border)}
+.perf-table-wrap{overflow-x:auto}
+.perf-table{width:100%;border-collapse:collapse;font-size:12px;min-width:500px}
+.perf-table th{background:var(--indigo);color:#fff;padding:9px 11px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.perf-table th:first-child{border-radius:var(--r-sm) 0 0 0}
+.perf-table th:last-child{border-radius:0 var(--r-sm) 0 0}
+.perf-table td{padding:8px 11px;border-bottom:1px solid var(--border);color:var(--ink2)}
+.perf-table tr:nth-child(even) td{background:#f8fafc}
+.perf-table tr:hover td{background:var(--indigo-l)}
+.pbar-wrap{background:var(--border);border-radius:20px;height:6px;overflow:hidden;width:80px;display:inline-block;vertical-align:middle;margin-right:6px}
+.pbar-fill{height:6px;border-radius:20px}
+.rank-badge{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:var(--border);color:var(--ink3)}
+.rank-1{background:#fef3c7;color:#78350f}.rank-2{background:#f1f5f9;color:#475569}.rank-3{background:#fce7f3;color:#831843}
+
+/* ── ATT PERF TABLE ── */
+.att-perf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.att-stu-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;display:flex;align-items:center;gap:10px}
+.att-stu-initial{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;font-family:'Space Grotesk',sans-serif}
+.att-stu-info{flex:1}
+.att-stu-name{font-size:12px;font-weight:600;color:var(--ink2)}
+.att-stu-stats{font-size:11px;color:var(--ink3)}
+.att-pct-badge{font-size:12px;font-weight:700;border-radius:var(--r-xs);padding:3px 8px}
+
+/* ── HISTORY TABLE ── */
+.htable{width:100%;border-collapse:collapse;font-size:12px}
+.htable th{background:var(--bg);padding:7px 10px;text-align:left;font-weight:600;border-bottom:1.5px solid var(--border);font-size:11px;text-transform:uppercase;color:var(--ink3)}
+.htable td{padding:7px 10px;border-bottom:1px solid var(--border)}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:36px 20px;color:var(--ink4)}
+.empty-icon{font-size:36px;margin-bottom:8px}
+.empty-msg{font-size:13px}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ink);color:#fff;padding:10px 22px;border-radius:30px;font-size:13px;font-weight:500;transition:.28s;opacity:0;z-index:9999;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ── SECTION LABELS ── */
+.sec-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ink4);margin-bottom:8px}
+
+/* ── FILTER ROW ── */
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+
+@media(max-width:600px){
+  .ment-areas{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .att-grid{grid-template-columns:repeat(2,1fr)}
+}
+.rd-student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.rd-stu-card{background:var(--bg);border:2px solid var(--border);border-radius:var(--r);padding:14px 12px;transition:.25s;position:relative;overflow:hidden}
+.rd-stu-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3.5px;background:var(--border);transition:.4s}
+.rd-stu-card.st-met::after{background:var(--green)}.rd-stu-card.st-met{border-color:#86efac;background:#f0fdf4}
+.rd-stu-card.st-half::after{background:var(--amber)}.rd-stu-card.st-half{border-color:#fcd34d;background:#fffbeb}
+.rd-stu-card.st-low::after{background:var(--red)}.rd-stu-card.st-low{border-color:#fca5a5;background:#fff5f5}
+.rd-stu-card.st-zero::after{background:var(--border)}
+.rd-top-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rd-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;font-family:'Space Grotesk',sans-serif}
+.rd-name{font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.rd-roll{font-size:10px;color:var(--ink4);flex-shrink:0}
+.rd-num-row{display:flex;align-items:baseline;justify-content:center;gap:4px;margin:6px 0 2px}
+.rd-bignum{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:800;line-height:1;transition:.15s}
+.rd-unit{font-size:11px;font-weight:600;color:var(--ink4)}
+.rd-slider{width:100%;margin:6px 0 4px;accent-color:var(--indigo);cursor:pointer;height:20px}
+.rd-goal-bar-wrap{background:var(--border);border-radius:20px;height:5px;overflow:hidden;margin-bottom:4px}
+.rd-goal-bar{height:5px;border-radius:20px;transition:.35s}
+.rd-goal-txt{font-size:10px;text-align:center;font-weight:600;margin-bottom:8px}
+.rd-quick{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.rd-qb{border:1.5px solid var(--border);background:#fff;border-radius:6px;padding:3px 7px;font-size:11px;font-weight:600;cursor:pointer;color:var(--ink3);transition:.15s;font-family:inherit}
+.rd-qb:hover,.rd-qb.sel{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.rd-manual{display:flex;align-items:center;gap:5px;margin-top:8px}
+.rd-minp{flex:1;border:1.5px solid var(--border);border-radius:6px;padding:5px 6px;font-size:13px;font-weight:700;text-align:center;font-family:'Space Grotesk',sans-serif;color:var(--ink);background:#fff}
+.rd-minp:focus{outline:none;border-color:var(--indigo)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="school-name">GMUPS Kannamangalam • Achanambalam</span>
+      <span class="class-title">📚 Class 7A — Mentor Portal</span>
+    </div>
+    <div class="header-right">
+      <span class="hdr-badge" id="stuBadge">0 Students</span>
+      <span class="hdr-date" id="hdrDate"></span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <div class="tab active" onclick="showTab('dashboard')"><span class="tab-icon">🏠</span> Dashboard</div>
+    <div class="tab" onclick="showTab('students')"><span class="tab-icon">👥</span> Students</div>
+    <div class="tab" onclick="showTab('attendance')"><span class="tab-icon">✅</span> Attendance</div>
+    <div class="tab" onclick="showTab('hw')"><span class="tab-icon">📖</span> HW / Assign</div>
+    <div class="tab" onclick="showTab('tests')"><span class="tab-icon">📝</span> Class Test</div>
+    <div class="tab" onclick="showTab('behaviour')"><span class="tab-icon">⭐</span> Behaviour</div>
+    <div class="tab" onclick="showTab('mentoring')"><span class="tab-icon">💬</span> Mentoring</div>
+    <div class="tab" onclick="showTab('performance')"><span class="tab-icon">📊</span> Performance</div>
+    <div class="tab" onclick="showTab('reading')"><span class="tab-icon">📚</span> Reading Time</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════════════ DASHBOARD -->
+<div class="section active" id="sec-dashboard">
+
+  <!-- Stat grid -->
+  <div class="stat-grid" id="statGrid">
+    <div class="stat-card c-indigo" onclick="showTab('students')">
+      <div class="stat-icon">👥</div>
+      <div class="stat-num" id="d-stu">0</div>
+      <div class="stat-lbl">Students</div>
+      <div class="stat-sub" style="color:var(--indigo)">Class 7A</div>
+    </div>
+    <div class="stat-card c-green" onclick="showTab('attendance')">
+      <div class="stat-icon">✅</div>
+      <div class="stat-num" id="d-att-p">—</div>
+      <div class="stat-lbl">Present Today</div>
+      <div class="stat-sub" id="d-att-sub" style="color:var(--green)"></div>
+    </div>
+    <div class="stat-card c-amber" onclick="showTab('attendance')">
+      <div class="stat-icon">🕐</div>
+      <div class="stat-num" id="d-att-l">—</div>
+      <div class="stat-lbl">Late Today</div>
+      <div class="stat-sub" id="d-att-l-sub" style="color:var(--amber)"></div>
+    </div>
+    <div class="stat-card c-red" onclick="showTab('attendance')">
+      <div class="stat-icon">❌</div>
+      <div class="stat-num" id="d-att-a">—</div>
+      <div class="stat-lbl">Absent Today</div>
+      <div class="stat-sub" id="d-att-a-sub" style="color:var(--red)"></div>
+    </div>
+    <div class="stat-card c-blue" onclick="showTab('hw')">
+      <div class="stat-icon">📖</div>
+      <div class="stat-num" id="d-hw">0</div>
+      <div class="stat-lbl">HW Tasks</div>
+      <div class="stat-sub" id="d-hw-sub" style="color:var(--blue)"></div>
+    </div>
+    <div class="stat-card c-purple" onclick="showTab('hw')">
+      <div class="stat-icon">📄</div>
+      <div class="stat-num" id="d-assign">0</div>
+      <div class="stat-lbl">Assignments</div>
+      <div class="stat-sub" id="d-assign-sub" style="color:var(--purple)"></div>
+    </div>
+    <div class="stat-card c-teal" onclick="showTab('tests')">
+      <div class="stat-icon">📝</div>
+      <div class="stat-num" id="d-tests">0</div>
+      <div class="stat-lbl">Tests Done</div>
+      <div class="stat-sub" id="d-test-sub" style="color:var(--teal)"></div>
+    </div>
+    <div class="stat-card c-pink" onclick="showTab('behaviour')">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-num" id="d-beh">0</div>
+      <div class="stat-lbl">Behaviour Logs</div>
+    </div>
+  </div>
+
+  <!-- Mark dashboard by subject -->
+  <div class="card" id="markDashCard">
+    <div class="card-head">
+      <div class="card-title"><span class="card-icon" style="background:#eef2ff">📊</span> Subject-wise Marks Overview</div>
+    </div>
+    <div class="mark-dash-grid" id="markDashGrid">
+      <div class="empty"><div class="empty-msg">No test marks recorded yet. Go to Class Test tab to add.</div></div>
+    </div>
+  </div>
+
+  <!-- Recent -->
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#fef3c7">🕐</span> Recent Activity</div></div>
+    <div id="recentList"><div class="empty"><div class="empty-icon">📋</div><div class="empty-msg">No activity yet. Start by adding students!</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ STUDENTS -->
+<div class="section" id="sec-students">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#eef2ff">👥</span> Add Students — Class 7A</div></div>
+    <p style="font-size:12px;color:var(--ink4);margin-bottom:10px">Enter one student name per line. Roll numbers assigned automatically.</p>
+    <textarea id="stuInput" rows="10" style="width:100%;font-size:13px" placeholder="Mohammed Aslam&#10;Fathima Noor&#10;Arjun P&#10;Sneha K&#10;..."></textarea>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="saveStudents()">💾 Save Students</button>
+      <button class="btn btn-outline btn-sm" onclick="clearStudents()">🗑 Clear All</button>
+    </div>
+  </div>
+  <div class="card" id="stuListCard" style="display:none">
+    <div class="card-head">
+      <div class="card-title"><span class="card-icon" style="background:#dcfce7">✅</span> Student List</div>
+      <span style="font-size:12px;color:var(--ink4)" id="stuCount2"></span>
+    </div>
+    <div class="stu-grid" id="stuGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ ATTENDANCE -->
+<div class="section" id="sec-attendance">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#dcfce7">✅</span> Daily Attendance</div></div>
+    <div class="att-tool-bar">
+      <input type="date" id="attDate">
+      <button class="btn btn-ghost btn-sm" onclick="loadAtt()">📂 Load</button>
+      <button class="btn btn-green btn-sm" onclick="markAll('present')">✅ All Present</button>
+      <button class="btn btn-red btn-sm" onclick="markAll('absent')">❌ All Absent</button>
+      <button class="btn btn-primary btn-sm" onclick="saveAtt()">💾 Save</button>
+    </div>
+    <div class="att-grid" id="attGrid"><div class="empty"><div class="empty-msg">Add students first.</div></div></div>
+    <div class="att-stat-row" id="attStats" style="display:none">
+      <div class="astat p"><div class="n" id="as-p">0</div><div class="l">Present</div></div>
+      <div class="astat lv"><div class="n" id="as-l">0</div><div class="l">Late</div></div>
+      <div class="astat a"><div class="n" id="as-a">0</div><div class="l">Absent</div></div>
+      <div class="astat pct"><div class="n" id="as-pct">—</div><div class="l">% Present</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#e0f2fe">📅</span> Attendance History</div></div>
+    <div id="attHistory"><div class="empty"><div class="empty-msg">No records yet.</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ HW / ASSIGN -->
+<div class="section" id="sec-hw">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#e0f2fe">📖</span> Create HW / Assignment</div></div>
+    <div class="task-toolbar">
+      <select id="hwType"><option value="HW">📖 Homework</option><option value="Assignment">📄 Assignment</option></select>
+      <input type="text" id="hwSubj" placeholder="Subject" style="width:120px">
+      <input type="text" id="hwTitle" placeholder="Topic / Title" style="flex:1;min-width:150px">
+      <input type="date" id="hwDate">
+      <button class="btn btn-primary btn-sm" onclick="createHW()">➕ Create</button>
+    </div>
+  </div>
+  <div id="hwList"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ CLASS TEST -->
+<div class="section" id="sec-tests">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#fce7f3">📝</span> New Class Test</div></div>
+    <div class="test-toolbar">
+      <input type="text" id="testName" placeholder="Test Name (e.g. Unit Test 1)" style="min-width:170px">
+      <input type="text" id="testSubj" placeholder="Subject" style="width:110px">
+      <input type="number" id="testMax" placeholder="Max" style="width:80px" value="20">
+      <input type="date" id="testDate">
+      <button class="btn btn-primary btn-sm" onclick="createTest()">➕ Create</button>
+    </div>
+  </div>
+  <div id="testList"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ BEHAVIOUR -->
+<div class="section" id="sec-behaviour">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#fef3c7">⭐</span> Add Behaviour Log</div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center">
+      <select id="behStu" style="min-width:200px"><option value="">— Select Student —</option></select>
+      <input type="date" id="behDate">
+    </div>
+    <div class="sec-label">Positive</div>
+    <div class="beh-tag-row" id="posTags">
+      <span class="btag pos" onclick="toggleBTag(this)">🌟 Excellent Work</span>
+      <span class="btag pos" onclick="toggleBTag(this)">🙋 Participates</span>
+      <span class="btag pos" onclick="toggleBTag(this)">📚 Regular HW</span>
+      <span class="btag pos" onclick="toggleBTag(this)">🤝 Helpful</span>
+      <span class="btag pos" onclick="toggleBTag(this)">😊 Good Attitude</span>
+      <span class="btag pos" onclick="toggleBTag(this)">🏅 Improved</span>
+      <span class="btag pos" onclick="toggleBTag(this)">🎯 Focused</span>
+    </div>
+    <div class="sec-label" style="margin-top:10px">Concerns</div>
+    <div class="beh-tag-row" id="negTags">
+      <span class="btag neg" onclick="toggleBTag(this)">😴 Inattentive</span>
+      <span class="btag neg" onclick="toggleBTag(this)">❌ Missing HW</span>
+      <span class="btag neg" onclick="toggleBTag(this)">🗣 Disruptive</span>
+      <span class="btag neg" onclick="toggleBTag(this)">😤 Attitude Issue</span>
+      <span class="btag neg" onclick="toggleBTag(this)">🏃 Irregular</span>
+      <span class="btag neg" onclick="toggleBTag(this)">📵 Phone Use</span>
+    </div>
+    <textarea id="behNote" rows="2" style="width:100%;margin-top:10px;font-size:12px" placeholder="Additional remarks (optional)…"></textarea>
+    <button class="btn btn-purple btn-sm" onclick="saveBeh()" style="margin-top:10px">💾 Save Log</button>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#ede9fe">📋</span> Behaviour Records</div></div>
+    <div class="filter-row">
+      <select id="behFilter" onchange="renderBehLogs()" style="min-width:180px"><option value="">All Students</option></select>
+    </div>
+    <div id="behLog"><div class="empty"><div class="empty-msg">No records yet.</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ MENTORING -->
+<div class="section" id="sec-mentoring">
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#ede9fe">💬</span> Mentoring Session</div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <select id="mentStu" style="min-width:200px"><option value="">— Select Student —</option></select>
+      <input type="date" id="mentDate">
+    </div>
+    <div class="ment-areas">
+      <div class="ment-area"><label>📚 Academic Status</label><textarea id="m-ac" placeholder="Strengths, weak areas…"></textarea></div>
+      <div class="ment-area"><label>🏡 Home Support</label><textarea id="m-hm" placeholder="Parent involvement, study at home…"></textarea></div>
+      <div class="ment-area"><label>❤️ Social / Emotional</label><textarea id="m-so" placeholder="Confidence, friendships…"></textarea></div>
+      <div class="ment-area"><label>🎯 Goals Set</label><textarea id="m-gl" placeholder="Goals discussed with student…"></textarea></div>
+    </div>
+    <textarea id="m-rm" rows="2" style="width:100%;font-size:12px" placeholder="Overall remarks / follow-up…"></textarea>
+    <button class="btn btn-purple btn-sm" onclick="saveMent()" style="margin-top:10px">💾 Save Session</button>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#ede9fe">📋</span> Mentoring History</div></div>
+    <div class="filter-row">
+      <select id="mentFilter" onchange="renderMentLogs()" style="min-width:180px"><option value="">All Students</option></select>
+    </div>
+    <div id="mentLog"><div class="empty"><div class="empty-msg">No sessions yet.</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ PERFORMANCE -->
+<div class="section" id="sec-performance">
+
+  <!-- Marks Rank Table -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title"><span class="card-icon" style="background:#fce7f3">🏆</span> Mark List — All Tests</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="perfTestFilter" onchange="renderPerfTable()" style="font-size:12px"><option value="">All Tests</option></select>
+        <select id="perfStuFilter" onchange="renderPerfTable()" style="font-size:12px"><option value="">All Students</option></select>
+      </div>
+    </div>
+    <div class="perf-table-wrap" id="perfTable"><div class="empty"><div class="empty-msg">No test data yet.</div></div></div>
+  </div>
+
+  <!-- Subject averages -->
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#eef2ff">📊</span> Subject-wise Performance</div></div>
+    <div id="subjPerf"><div class="empty"><div class="empty-msg">No tests yet.</div></div></div>
+  </div>
+
+  <!-- Attendance Performance -->
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#dcfce7">✅</span> Attendance Summary</div></div>
+    <div class="att-perf-grid" id="attPerfGrid"><div class="empty"><div class="empty-msg">No attendance records yet.</div></div></div>
+  </div>
+
+  <!-- HW compliance -->
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#e0f2fe">📖</span> HW / Assignment Compliance</div></div>
+    <div id="hwPerf"><div class="empty"><div class="empty-msg">No HW tasks yet.</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ READING TIME -->
+<div class="section" id="sec-reading">
+
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#fef3c7">📚</span> Mark Reading Time</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px">
+      <div><div class="sec-label" style="margin-bottom:4px">Date</div><input type="date" id="rdDate" onchange="loadRdForDate()"></div>
+      <div><div class="sec-label" style="margin-bottom:4px">Book / Title (optional)</div><input type="text" id="rdBook" placeholder="e.g. Harry Potter, Newspaper…" style="min-width:210px"></div>
+      <div style="display:flex;gap:6px;align-items:center;margin-left:auto">
+        <input type="number" id="rdBulkMins" placeholder="min" style="width:68px">
+        <button class="btn btn-ghost btn-sm" onclick="setAllReading()">⚡ Set All</button>
+        <button class="btn btn-red btn-sm" onclick="clearAllReading()">✖ Clear All</button>
+      </div>
+    </div>
+    <div id="rdEntryGrid"><div class="empty"><div class="empty-msg">Add students first.</div></div></div>
+    <button class="btn btn-primary" onclick="saveReading()" style="margin-top:16px;width:100%;justify-content:center;font-size:14px">💾 Save Reading Log</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-title"><span class="card-icon" style="background:#dcfce7">🎯</span> Daily Reading Goal</div></div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <input type="number" id="rdGoal" placeholder="Minutes per day" style="width:160px" value="20">
+      <button class="btn btn-green btn-sm" onclick="saveRdGoal()">✅ Set Goal</button>
+      <span style="font-size:13px;color:var(--ink3);font-weight:500" id="rdGoalDisplay"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title"><span class="card-icon" style="background:#fce7f3">🏆</span> Reading Leaderboard</div>
+    </div>
+    <div id="rdLeaderboard"><div class="empty"><div class="empty-msg">No data yet.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title"><span class="card-icon" style="background:#e0f2fe">📅</span> Reading History</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="rdFilter" onchange="renderRdHistory()" style="font-size:12px"><option value="">All Students</option></select>
+        <select id="rdDateFilter" onchange="renderRdHistory()" style="font-size:12px"><option value="">All Dates</option></select>
+      </div>
+    </div>
+    <div id="rdHistory"><div class="empty"><div class="empty-msg">No reading records yet.</div></div></div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  STORAGE
+// ═══════════════════════════════════════════════════════
+const K='gmups7a_v2_';
+const sv=(k,v)=>localStorage.setItem(K+k,JSON.stringify(v));
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(K+k))??d}catch{return d}};
+
+let students=ld('stu',[]);
+let attendance=ld('att',{});
+let hwTasks=ld('hw',[]);
+let tests=ld('tests',[]);
+let behaviour=ld('beh',[]);
+let mentoring=ld('ment',[]);
+let reading=ld('reading',[]);
+let rdGoal=ld('rdGoal',20);
+
+const SUBJ_COLORS={
+  BS:{bg:'#ede9fe',bar:'#7c3aed',icon:'🔬'},
+  Maths:{bg:'#dbeafe',bar:'#1d4ed8',icon:'🔢'},
+  Eng:{bg:'#dcfce7',bar:'#15803d',icon:'📘'},
+  SS:{bg:'#fef3c7',bar:'#b45309',icon:'🌍'},
+  Hindi:{bg:'#fce7f3',bar:'#be185d',icon:'🗣️'},
+  Mal2:{bg:'#e0f2fe',bar:'#0369a1',icon:'📖'},
+  ICT:{bg:'#f1f5f9',bar:'#475569',icon:'💻'},
+  Art:{bg:'#fff7ed',bar:'#c2410c',icon:'🎨'},
+  default:{bg:'#f1f5f9',bar:'#6366f1',icon:'📝'}
+};
+function subjColor(s){return SUBJ_COLORS[s]||SUBJ_COLORS.default;}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+function init(){
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('hdrDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  ['attDate','hwDate','testDate','behDate','mentDate','rdDate'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=today;});
+  if(students.length){
+    document.getElementById('stuInput').value=students.map(s=>s.name).join('\n');
+    renderStuList();
+  }
+  loadAtt();
+  renderHWList();
+  renderTestList();
+  renderBehLogs();
+  renderMentLogs();
+  renderRdEntryGrid();
+  renderRdHistory();
+  renderRdLeaderboard();
+  updateRdGoalDisplay();
+  updateDash();
+}
+
+// ═══════════════════════════════════════════════════════
+//  TABS
+// ═══════════════════════════════════════════════════════
+function showTab(id){
+  const ids=['dashboard','students','attendance','hw','tests','behaviour','mentoring','performance','reading'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(id==='dashboard'){updateDash();}
+  if(id==='attendance'){loadAtt();}
+  if(id==='performance'){renderPerfTable();renderSubjPerf();renderAttPerf();renderHWPerf();}
+  if(id==='reading'){loadRdForDate();renderRdHistory();renderRdLeaderboard();}
+}
+
+// ═══════════════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════════════
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300);}
+
+// ═══════════════════════════════════════════════════════
+//  STUDENTS
+// ═══════════════════════════════════════════════════════
+function saveStudents(){
+  const raw=document.getElementById('stuInput').value.trim();
+  if(!raw){toast('⚠️ Enter student names');return;}
+  const names=raw.split('\n').map(n=>n.trim()).filter(Boolean);
+  students=names.map((name,i)=>({id:i+1,name}));
+  sv('stu',students);
+  renderStuList();
+  populateSelects();
+  renderRdEntryGrid();
+  updateDash();
+  toast('✅ '+students.length+' students saved!');
+}
+function clearStudents(){
+  if(!confirm('Clear all students?'))return;
+  students=[];sv('stu',[]);
+  document.getElementById('stuInput').value='';
+  document.getElementById('stuListCard').style.display='none';
+  document.getElementById('stuBadge').textContent='0 Students';
+  populateSelects();updateDash();toast('🗑 Cleared');
+}
+function renderStuList(){
+  const card=document.getElementById('stuListCard');
+  document.getElementById('stuCount2').textContent=students.length+' students';
+  document.getElementById('stuBadge').textContent=students.length+' Students';
+  card.style.display=students.length?'block':'none';
+  document.getElementById('stuGrid').innerHTML=students.map(s=>`<div class="stu-chip"><span class="stu-roll">${s.id}</span>${s.name}</div>`).join('');
+  populateSelects();
+}
+function populateSelects(){
+  const opts='<option value="">— Select Student —</option>'+students.map(s=>`<option value="${s.id}">${s.id}. ${s.name}</option>`).join('');
+  ['behStu','mentStu'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts;});
+  const fOpts='<option value="">All Students</option>'+students.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  ['behFilter','mentFilter','perfStuFilter','rdFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=fOpts;});
+}
+
+// ═══════════════════════════════════════════════════════
+//  ATTENDANCE
+// ═══════════════════════════════════════════════════════
+function loadAtt(){
+  const date=document.getElementById('attDate').value;
+  if(!date||!students.length){renderAttGrid();return;}
+  attState=attendance[date]?{...attendance[date]}:{};
+  renderAttGrid();
+}
+function renderAttGrid(){
+  const grid=document.getElementById('attGrid');
+  if(!students.length){grid.innerHTML='<div class="empty"><div class="empty-msg">Add students first.</div></div>';return;}
+  grid.innerHTML=students.map(s=>{
+    const st=attState[s.id]||'';
+    return `<div class="att-item ${st}" id="ai-${s.id}">
+      <span class="att-name">${s.id}. ${s.name}</span>
+      <div class="att-btns">
+        <button class="att-btn ab-p" onclick="setAtt(${s.id},'present')">P</button>
+        <button class="att-btn ab-a" onclick="setAtt(${s.id},'absent')">A</button>
+        <button class="att-btn ab-l" onclick="setAtt(${s.id},'late')">L</button>
+      </div>
+    </div>`;
+  }).join('');
+  updateAttStats();
+}
+function setAtt(id,status){
+  attState[id]=status;
+  const el=document.getElementById('ai-'+id);
+  if(el)el.className='att-item '+status;
+  updateAttStats();
+}
+function markAll(status){students.forEach(s=>{attState[s.id]=status;});renderAttGrid();}
+function updateAttStats(){
+  const vals=Object.values(attState);
+  const p=vals.filter(v=>v==='present').length;
+  const a=vals.filter(v=>v==='absent').length;
+  const l=vals.filter(v=>v==='late').length;
+  const tot=students.length||1;
+  document.getElementById('as-p').textContent=p;
+  document.getElementById('as-a').textContent=a;
+  document.getElementById('as-l').textContent=l;
+  document.getElementById('as-pct').textContent=Math.round((p+l)/tot*100)+'%';
+  document.getElementById('attStats').style.display=students.length?'flex':'none';
+}
+function saveAtt(){
+  const date=document.getElementById('attDate').value;
+  if(!date){toast('⚠️ Select date');return;}
+  if(!students.length){toast('⚠️ Add students first');return;}
+  attendance[date]={...attState};
+  sv('att',attendance);
+  renderAttHistory();
+  updateDash();
+  toast('✅ Attendance saved for '+date);
+}
+function renderAttHistory(){
+  const dates=Object.keys(attendance).sort().reverse();
+  const el=document.getElementById('attHistory');
+  if(!dates.length){el.innerHTML='<div class="empty"><div class="empty-msg">No records yet.</div></div>';return;}
+  el.innerHTML='<table class="htable"><thead><tr><th>Date</th><th>Present</th><th>Late</th><th>Absent</th><th>%</th></tr></thead><tbody>'+
+    dates.map(d=>{
+      const rec=attendance[d];const vals=Object.values(rec);
+      const p=vals.filter(v=>v==='present').length;
+      const a=vals.filter(v=>v==='absent').length;
+      const l=vals.filter(v=>v==='late').length;
+      const tot=students.length||1;
+      return `<tr><td><b>${d}</b></td><td style="color:var(--green);font-weight:600">${p}</td><td style="color:var(--amber);font-weight:600">${l}</td><td style="color:var(--red);font-weight:600">${a}</td><td><b>${Math.round((p+l)/tot*100)}%</b></td></tr>`;
+    }).join('')+'</tbody></table>';
+}
+
+// ═══════════════════════════════════════════════════════
+//  HW / ASSIGNMENTS
+// ═══════════════════════════════════════════════════════
+function createHW(){
+  const type=document.getElementById('hwType').value;
+  const subj=document.getElementById('hwSubj').value.trim();
+  const title=document.getElementById('hwTitle').value.trim();
+  const date=document.getElementById('hwDate').value;
+  if(!subj||!title){toast('⚠️ Enter subject and title');return;}
+  if(!students.length){toast('⚠️ Add students first');return;}
+  hwTasks.unshift({id:Date.now(),type,subj,title,date,done:{}});
+  sv('hw',hwTasks);
+  document.getElementById('hwTitle').value='';
+  renderHWList();updateDash();
+  toast('✅ '+type+' created');
+}
+function toggleHW(tid,sid){
+  const t=hwTasks.find(x=>x.id==tid);if(!t)return;
+  t.done[sid]=!t.done[sid];sv('hw',hwTasks);renderHWList();
+}
+function delHW(tid){hwTasks=hwTasks.filter(x=>x.id!=tid);sv('hw',hwTasks);renderHWList();updateDash();toast('🗑 Deleted');}
+function renderHWList(){
+  const el=document.getElementById('hwList');
+  if(!hwTasks.length){el.innerHTML='<div class="card"><div class="empty"><div class="empty-icon">📖</div><div class="empty-msg">No tasks yet.</div></div></div>';return;}
+  el.innerHTML=hwTasks.map(t=>{
+    const done=students.filter(s=>t.done[s.id]).length;
+    const tot=students.length;
+    const pct=tot?Math.round(done/tot*100):0;
+    const sc=subjColor(t.subj);
+    return `<div class="card">
+      <div class="card-head">
+        <div class="card-title">
+          <span class="card-icon" style="background:${sc.bg}">${t.type==='HW'?'📖':'📄'}</span>
+          <span>${t.type}: <b>${t.subj}</b> — ${t.title}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--ink4)">${t.date}</span>
+          <button class="btn btn-red btn-xs" onclick="delHW(${t.id})">🗑</button>
+        </div>
+      </div>
+      <div class="task-progress">
+        <div class="tpb"><div class="tpb-fill" style="width:${pct}%;background:${pct==100?'var(--green)':'var(--indigo)'}"></div></div>
+        <span class="tpb-txt">${done}/${tot} submitted (${pct}%)</span>
+      </div>
+      <div class="check-grid" style="margin-top:10px">
+        ${students.map(s=>`<label class="check-item ${t.done[s.id]?'done':'not-done'}">
+          <input type="checkbox" ${t.done[s.id]?'checked':''} onchange="toggleHW(${t.id},${s.id})">
+          ${s.id}. ${s.name}
+        </label>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  CLASS TESTS
+// ═══════════════════════════════════════════════════════
+function createTest(){
+  const name=document.getElementById('testName').value.trim();
+  const subj=document.getElementById('testSubj').value.trim();
+  const max=parseInt(document.getElementById('testMax').value)||20;
+  const date=document.getElementById('testDate').value;
+  if(!name||!subj){toast('⚠️ Enter name and subject');return;}
+  if(!students.length){toast('⚠️ Add students first');return;}
+  tests.unshift({id:Date.now(),name,subj,max,date,marks:{}});
+  sv('tests',tests);
+  document.getElementById('testName').value='';
+  renderTestList();updatePerfFilter();updateDash();updateMarkDash();
+  toast('✅ Test created');
+}
+function setMark(tid,sid,val){
+  const t=tests.find(x=>x.id==tid);if(!t)return;
+  const v=parseFloat(val);
+  t.marks[sid]=(isNaN(v)||val==='')?'':Math.min(v,t.max);
+  sv('tests',tests);
+  const badge=document.getElementById(`gb-${tid}-${sid}`);
+  if(badge)updateGrade(badge,t.marks[sid],t.max);
+}
+function updateGrade(el,mark,max){
+  if(mark===''||mark===undefined){el.textContent='';el.className='grade-pill';return;}
+  const pct=mark/max*100;
+  const g=pct>=80?'A':pct>=50?'B':'C';
+  el.textContent=g;el.className='grade-pill g'+g;
+}
+function delTest(tid){tests=tests.filter(x=>x.id!=tid);sv('tests',tests);renderTestList();updatePerfFilter();updateDash();updateMarkDash();toast('🗑 Deleted');}
+function saveTestMarks(tid){sv('tests',tests);toast('✅ Marks saved');updateMarkDash();}
+function renderTestList(){
+  const el=document.getElementById('testList');
+  if(!tests.length){el.innerHTML='<div class="card"><div class="empty"><div class="empty-icon">📝</div><div class="empty-msg">No tests yet.</div></div></div>';return;}
+  el.innerHTML=tests.map(t=>{
+    const entered=students.filter(s=>t.marks[s.id]!==undefined&&t.marks[s.id]!=='');
+    const avg=entered.length?(entered.reduce((a,s)=>a+parseFloat(t.marks[s.id]),0)/entered.length).toFixed(1):'—';
+    const sc=subjColor(t.subj);
+    return `<div class="card">
+      <div class="card-head">
+        <div class="card-title">
+          <span class="card-icon" style="background:${sc.bg}">${sc.icon}</span>
+          <span>${t.name} — <b>${t.subj}</b> &nbsp;(Max: ${t.max})</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--ink4)">${t.date}</span>
+          <span style="font-size:12px;font-weight:700;color:var(--indigo)">Avg: ${avg}</span>
+          <button class="btn btn-teal btn-xs" onclick="saveTestMarks(${t.id})">💾 Save</button>
+          <button class="btn btn-red btn-xs" onclick="delTest(${t.id})">🗑</button>
+        </div>
+      </div>
+      <div class="marks-grid">
+        ${students.map(s=>`<div class="mark-item">
+          <span class="mn">${s.id}. ${s.name}</span>
+          <input class="mark-inp" type="number" min="0" max="${t.max}" value="${t.marks[s.id]!==undefined?t.marks[s.id]:''}"
+            onchange="setMark(${t.id},${s.id},this.value)"
+            oninput="updateGrade(document.getElementById('gb-${t.id}-${s.id}'),parseFloat(this.value)||'',${t.max})">
+          <span class="grade-pill" id="gb-${t.id}-${s.id}"></span>
+        </div>`).join('')}
+      </div>
+      <div class="test-avg-row">
+        <span style="color:var(--ink3)">Entered: <b>${entered.length}/${students.length}</b></span>
+        <span style="color:var(--indigo)">Class Avg: <b>${avg}</b></span>
+        <span style="color:var(--green)">Max: <b>${t.max}</b></span>
+      </div>
+    </div>`;
+  }).join('');
+  tests.forEach(t=>{students.forEach(s=>{const el=document.getElementById(`gb-${t.id}-${s.id}`);if(el)updateGrade(el,t.marks[s.id],t.max);});});
+}
+
+// ═══════════════════════════════════════════════════════
+//  BEHAVIOUR
+// ═══════════════════════════════════════════════════════
+function toggleBTag(el){el.classList.toggle('sel');}
+function saveBeh(){
+  const sid=document.getElementById('behStu').value;
+  const date=document.getElementById('behDate').value;
+  const note=document.getElementById('behNote').value.trim();
+  if(!sid){toast('⚠️ Select student');return;}
+  const pos=[...document.querySelectorAll('#posTags .btag.sel')].map(e=>e.textContent.trim());
+  const neg=[...document.querySelectorAll('#negTags .btag.sel')].map(e=>e.textContent.trim());
+  if(!pos.length&&!neg.length&&!note){toast('⚠️ Select tags or add note');return;}
+  const stu=students.find(s=>s.id==sid);
+  behaviour.unshift({id:Date.now(),sid:+sid,sname:stu.name,date,pos,neg,note});
+  sv('beh',behaviour);
+  document.querySelectorAll('.btag.sel').forEach(e=>e.classList.remove('sel'));
+  document.getElementById('behNote').value='';
+  renderBehLogs();updateDash();toast('✅ Behaviour saved');
+}
+function renderBehLogs(){
+  const filter=document.getElementById('behFilter')?.value;
+  const el=document.getElementById('behLog');
+  let logs=filter?behaviour.filter(b=>b.sid==filter):behaviour;
+  if(!logs.length){el.innerHTML='<div class="empty"><div class="empty-msg">No records yet.</div></div>';return;}
+  el.innerHTML=logs.map(b=>`<div class="beh-entry">
+    <div class="beh-meta">📅 ${b.date} — ${b.sname}</div>
+    ${b.note?`<div style="color:var(--ink2);margin-bottom:4px">${b.note}</div>`:''}
+    <div>${b.pos.map(t=>`<span class="bpill pos">${t}</span>`).join('')}${b.neg.map(t=>`<span class="bpill neg">${t}</span>`).join('')}</div>
+  </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MENTORING
+// ═══════════════════════════════════════════════════════
+function saveMent(){
+  const sid=document.getElementById('mentStu').value;
+  const date=document.getElementById('mentDate').value;
+  if(!sid){toast('⚠️ Select student');return;}
+  const stu=students.find(s=>s.id==sid);
+  const fields={ac:document.getElementById('m-ac').value.trim(),hm:document.getElementById('m-hm').value.trim(),so:document.getElementById('m-so').value.trim(),gl:document.getElementById('m-gl').value.trim(),rm:document.getElementById('m-rm').value.trim()};
+  if(!Object.values(fields).some(Boolean)){toast('⚠️ Fill at least one field');return;}
+  mentoring.unshift({id:Date.now(),sid:+sid,sname:stu.name,date,...fields});
+  sv('ment',mentoring);
+  ['m-ac','m-hm','m-so','m-gl','m-rm'].forEach(id=>document.getElementById(id).value='');
+  renderMentLogs();updateDash();toast('✅ Session saved');
+}
+function renderMentLogs(){
+  const filter=document.getElementById('mentFilter')?.value;
+  const el=document.getElementById('mentLog');
+  let logs=filter?mentoring.filter(m=>m.sid==filter):mentoring;
+  if(!logs.length){el.innerHTML='<div class="empty"><div class="empty-msg">No sessions yet.</div></div>';return;}
+  el.innerHTML=logs.map(m=>`<div class="ment-entry">
+    <div class="ment-meta">💬 ${m.date} — ${m.sname}</div>
+    ${m.ac?`<div class="ment-row"><b>📚 Academic:</b> ${m.ac}</div>`:''}
+    ${m.hm?`<div class="ment-row"><b>🏡 Home:</b> ${m.hm}</div>`:''}
+    ${m.so?`<div class="ment-row"><b>❤️ Social:</b> ${m.so}</div>`:''}
+    ${m.gl?`<div class="ment-row"><b>🎯 Goals:</b> ${m.gl}</div>`:''}
+    ${m.rm?`<div class="ment-row"><b>📋 Remarks:</b> ${m.rm}</div>`:''}
+  </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PERFORMANCE
+// ═══════════════════════════════════════════════════════
+function updatePerfFilter(){
+  const el=document.getElementById('perfTestFilter');
+  if(!el)return;
+  el.innerHTML='<option value="">All Tests</option>'+tests.map(t=>`<option value="${t.id}">${t.name} (${t.subj})</option>`).join('');
+}
+function renderPerfTable(){
+  updatePerfFilter();
+  const tFilter=document.getElementById('perfTestFilter')?.value;
+  const sFilter=document.getElementById('perfStuFilter')?.value;
+  const el=document.getElementById('perfTable');
+  const filtTests=tFilter?tests.filter(t=>t.id==tFilter):tests;
+  const filtStus=sFilter?students.filter(s=>s.id==sFilter):students;
+  if(!filtTests.length||!filtStus.length){el.innerHTML='<div class="empty"><div class="empty-msg">No data yet.</div></div>';return;}
+
+  // compute totals & sort by avg desc
+  const rows=filtStus.map(s=>{
+    const marks=filtTests.map(t=>({t,m:t.marks[s.id]!==undefined&&t.marks[s.id]!==''?parseFloat(t.marks[s.id]):null}));
+    const valid=marks.filter(x=>x.m!==null);
+    const total=valid.reduce((a,x)=>a+x.m,0);
+    const maxTotal=valid.reduce((a,x)=>a+x.t.max,0);
+    const pct=maxTotal?Math.round(total/maxTotal*100):null;
+    return {s,marks,total,maxTotal,pct};
+  }).sort((a,b)=>(b.pct??-1)-(a.pct??-1));
+
+  let html=`<table class="perf-table"><thead><tr><th>Rank</th><th>Student</th>`;
+  filtTests.forEach(t=>html+=`<th>${t.name}<br><small style="font-weight:400;opacity:.8">${t.subj} / ${t.max}</small></th>`);
+  html+=`<th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>`;
+
+  rows.forEach((row,i)=>{
+    const rank=i+1;
+    const rClass=rank<=3?`rank-${rank}`:'';
+    html+=`<tr><td><span class="rank-badge ${rClass}">${rank}</span></td><td style="font-weight:500">${row.s.name}</td>`;
+    row.marks.forEach(({t,m})=>{
+      if(m===null){html+=`<td style="color:var(--ink4)">—</td>`;return;}
+      const pct=m/t.max*100;
+      const g=pct>=80?'A':pct>=50?'B':'C';
+      const col=pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+      html+=`<td><span style="font-weight:600;color:${col}">${m}</span></td>`;
+    });
+    const pct=row.pct;
+    const g=pct>=80?'A':pct>=50?'B':'C';
+    html+=`<td style="font-weight:700">${row.total}/${row.maxTotal}</td>`;
+    html+=`<td>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="pbar-wrap"><div class="pbar-fill" style="width:${pct||0}%;background:${pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)'}"></div></div>
+        <span style="font-weight:600;font-size:11px">${pct!==null?pct+'%':'—'}</span>
+      </div>
+    </td>`;
+    html+=`<td><span class="grade-pill g${g}">${g}</span></td></tr>`;
+  });
+  html+=`</tbody></table>`;
+  el.innerHTML=html;
+}
+function renderSubjPerf(){
+  const el=document.getElementById('subjPerf');
+  if(!tests.length){el.innerHTML='<div class="empty"><div class="empty-msg">No tests yet.</div></div>';return;}
+  const subjMap={};
+  tests.forEach(t=>{
+    if(!subjMap[t.subj])subjMap[t.subj]={scores:[],max:[]};
+    students.forEach(s=>{
+      const m=t.marks[s.id];
+      if(m!==undefined&&m!==''){subjMap[t.subj].scores.push(parseFloat(m));subjMap[t.subj].max.push(t.max);}
+    });
+  });
+  const sc=Object.entries(subjMap);
+  if(!sc.length){el.innerHTML='<div class="empty"><div class="empty-msg">No marks entered yet.</div></div>';return;}
+  el.innerHTML=`<div class="mark-dash-grid">`+sc.map(([subj,data])=>{
+    const totalScore=data.scores.reduce((a,b)=>a+b,0);
+    const totalMax=data.max.reduce((a,b)=>a+b,0);
+    const pct=totalMax?Math.round(totalScore/totalMax*100):0;
+    const avg=(data.scores.length?totalScore/data.scores.length:0).toFixed(1);
+    const c=subjColor(subj);
+    const col=pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+    return `<div class="mark-subject-card">
+      <div class="ms-icon" style="background:${c.bg}">${c.icon}</div>
+      <div class="ms-info">
+        <div class="ms-name">${subj}</div>
+        <div class="ms-avg" style="color:${col}">${avg}</div>
+        <div class="ms-scores">${data.scores.length} entries · ${pct}% avg</div>
+        <div class="ms-bar-wrap"><div class="ms-bar" style="width:${pct}%;background:${c.bar}"></div></div>
+      </div>
+    </div>`;
+  }).join('')+`</div>`;
+}
+function renderAttPerf(){
+  const el=document.getElementById('attPerfGrid');
+  const dates=Object.keys(attendance);
+  if(!dates.length||!students.length){el.innerHTML='<div class="empty"><div class="empty-msg">No attendance data yet.</div></div>';return;}
+  const COLORS=['#4f46e5','#7c3aed','#0891b2','#16a34a','#d97706','#db2777','#dc2626','#0284c7'];
+  el.innerHTML=students.map((s,i)=>{
+    let p=0,a=0,l=0;
+    dates.forEach(d=>{const v=attendance[d][s.id];if(v==='present')p++;else if(v==='absent')a++;else if(v==='late')l++;});
+    const tot=p+a+l||1;
+    const pct=Math.round((p+l)/tot*100);
+    const col=pct>=90?'var(--green)':pct>=75?'var(--amber)':'var(--red)';
+    const bg=COLORS[i%COLORS.length];
+    const initials=s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    return `<div class="att-stu-card">
+      <div class="att-stu-initial" style="background:${bg}20;color:${bg}">${initials}</div>
+      <div class="att-stu-info">
+        <div class="att-stu-name">${s.name}</div>
+        <div class="att-stu-stats">P:${p} L:${l} A:${a} (${dates.length} days)</div>
+      </div>
+      <span class="att-pct-badge" style="background:${col}15;color:${col}">${pct}%</span>
+    </div>`;
+  }).join('');
+}
+function renderHWPerf(){
+  const el=document.getElementById('hwPerf');
+  if(!hwTasks.length||!students.length){el.innerHTML='<div class="empty"><div class="empty-msg">No HW tasks yet.</div></div>';return;}
+  const stuScores=students.map(s=>{
+    const done=hwTasks.filter(t=>t.done[s.id]).length;
+    const pct=Math.round(done/hwTasks.length*100);
+    return {s,done,pct};
+  }).sort((a,b)=>b.pct-a.pct);
+  el.innerHTML='<table class="htable"><thead><tr><th>#</th><th>Student</th><th>Submitted</th><th>Compliance</th></tr></thead><tbody>'+
+    stuScores.map((x,i)=>{
+      const col=x.pct>=90?'var(--green)':x.pct>=60?'var(--amber)':'var(--red)';
+      return `<tr><td>${i+1}</td><td>${x.s.name}</td><td style="font-weight:600">${x.done}/${hwTasks.length}</td>
+        <td><div style="display:flex;align-items:center;gap:8px">
+          <div class="pbar-wrap"><div class="pbar-fill" style="width:${x.pct}%;background:${col}"></div></div>
+          <span style="font-weight:600;font-size:11px;color:${col}">${x.pct}%</span>
+        </div></td></tr>`;
+    }).join('')+'</tbody></table>';
+}
+
+// ═══════════════════════════════════════════════════════
+//  DASHBOARD
+// ═══════════════════════════════════════════════════════
+function updateMarkDash(){
+  const el=document.getElementById('markDashGrid');
+  if(!tests.length){el.innerHTML='<div class="empty"><div class="empty-msg">No test marks recorded yet.</div></div>';return;}
+  const subjMap={};
+  tests.forEach(t=>{
+    if(!subjMap[t.subj])subjMap[t.subj]={scores:[],max:[],tests:0};
+    subjMap[t.subj].tests++;
+    students.forEach(s=>{
+      const m=t.marks[s.id];
+      if(m!==undefined&&m!==''){subjMap[t.subj].scores.push(parseFloat(m));subjMap[t.subj].max.push(t.max);}
+    });
+  });
+  el.innerHTML=Object.entries(subjMap).map(([subj,data])=>{
+    const totalScore=data.scores.reduce((a,b)=>a+b,0);
+    const totalMax=data.max.reduce((a,b)=>a+b,0);
+    const pct=totalMax?Math.round(totalScore/totalMax*100):0;
+    const avg=(data.scores.length?totalScore/data.scores.length:0).toFixed(1);
+    const c=subjColor(subj);
+    const col=pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+    return `<div class="mark-subject-card">
+      <div class="ms-icon" style="background:${c.bg}">${c.icon}</div>
+      <div class="ms-info">
+        <div class="ms-name" style="font-size:13px">${subj}</div>
+        <div class="ms-avg" style="color:${col}">${avg}<span style="font-size:10px;color:var(--ink4);margin-left:2px">avg</span></div>
+        <div class="ms-scores">${data.tests} test(s) · ${pct}%</div>
+        <div class="ms-bar-wrap"><div class="ms-bar" style="width:${pct}%;background:${c.bar}"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function updateDash(){
+  document.getElementById('d-stu').textContent=students.length;
+  document.getElementById('d-hw').textContent=hwTasks.filter(t=>t.type==='HW').length;
+  document.getElementById('d-assign').textContent=hwTasks.filter(t=>t.type==='Assignment').length;
+  document.getElementById('d-tests').textContent=tests.length;
+  document.getElementById('d-beh').textContent=behaviour.length;
+  // hw sub
+  const hwDone=hwTasks.filter(t=>t.type==='HW').length;
+  document.getElementById('d-hw-sub').textContent=hwDone?hwDone+' active task(s)':'No HW yet';
+  document.getElementById('d-assign-sub').textContent=hwTasks.filter(t=>t.type==='Assignment').length?'Active':'None yet';
+  // today att
+  const today=new Date().toISOString().split('T')[0];
+  if(attendance[today]){
+    const vals=Object.values(attendance[today]);
+    const p=vals.filter(v=>v==='present').length;
+    const a=vals.filter(v=>v==='absent').length;
+    const l=vals.filter(v=>v==='late').length;
+    document.getElementById('d-att-p').textContent=p;
+    document.getElementById('d-att-l').textContent=l;
+    document.getElementById('d-att-a').textContent=a;
+    const tot=students.length||1;
+    document.getElementById('d-att-sub').textContent=Math.round((p+l)/tot*100)+'% present';
+    document.getElementById('d-att-l-sub').textContent=l>0?l+' student(s) late':'All on time';
+    document.getElementById('d-att-a-sub').textContent=a>0?a+' absent':'Full attendance!';
+  } else {
+    ['d-att-p','d-att-l','d-att-a'].forEach(id=>document.getElementById(id).textContent='—');
+    ['d-att-sub','d-att-l-sub','d-att-a-sub'].forEach(id=>document.getElementById(id).textContent='Not taken today');
+  }
+  // test sub
+  if(tests.length){
+    const latest=tests[0];
+    document.getElementById('d-test-sub').textContent='Last: '+latest.name;
+  }
+  updateMarkDash();
+  renderAttHistory();
+  // recent
+  const items=[];
+  const today2=today;
+  if(attendance[today2])items.push({icon:'✅',label:'Attendance taken today',meta:today2});
+  hwTasks.slice(0,2).forEach(t=>items.push({icon:t.type==='HW'?'📖':'📄',label:t.type+': '+t.subj+' — '+t.title,meta:t.date}));
+  tests.slice(0,2).forEach(t=>items.push({icon:'📝',label:t.name+' ('+t.subj+')',meta:t.date}));
+  behaviour.slice(0,2).forEach(b=>items.push({icon:'⭐',label:'Behaviour: '+b.sname,meta:b.date}));
+  mentoring.slice(0,2).forEach(m=>items.push({icon:'💬',label:'Mentoring: '+m.sname,meta:m.date}));
+  const rel=document.getElementById('recentList');
+  if(!items.length){rel.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-msg">No activity yet. Start by adding students!</div></div>';return;}
+  rel.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px">` +
+    items.slice(0,6).map(i=>`<div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 13px;font-size:12px">
+      <span style="font-weight:500;color:var(--ink2)">${i.icon} ${i.label}</span>
+      <span style="color:var(--ink4);font-size:11px">${i.meta}</span>
+    </div>`).join('')+`</div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  READING TIME
+// ═══════════════════════════════════════════════════════
+let rdMins={};
+const RD_COLORS=['#4f46e5','#7c3aed','#0891b2','#16a34a','#d97706','#db2777','#dc2626','#0284c7','#0f766e','#b45309','#9333ea','#0369a1'];
+const QUICK_VALS=[10,15,20,25,30,45,60];
+
+function loadRdForDate(){
+  const date=document.getElementById('rdDate')?.value;
+  if(!date)return;
+  const existing=reading.find(r=>r.date===date);
+  if(existing){
+    rdMins={...existing.mins};
+    const bookEl=document.getElementById('rdBook');
+    if(bookEl)bookEl.value=existing.book||'';
+    toast('📅 Loaded existing data for '+date);
+  } else {
+    rdMins={};
+    const bookEl=document.getElementById('rdBook');
+    if(bookEl)bookEl.value='';
+  }
+  renderRdEntryGrid();
+}
+
+function renderRdEntryGrid(){
+  const el=document.getElementById('rdEntryGrid');
+  if(!el)return;
+  if(!students.length){el.innerHTML='<div class="empty"><div class="empty-msg">Add students first.</div></div>';return;}
+  el.innerHTML=`<div class="rd-student-grid">${students.map((s,i)=>{
+    const bg=RD_COLORS[i%RD_COLORS.length];
+    const initials=s.name.trim().split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const val=rdMins[s.id]||0;
+    return `<div class="rd-stu-card ${rdCardClass(val)}" id="rdc-${s.id}">
+      <div class="rd-top-row">
+        <div class="rd-avatar" style="background:${bg}20;color:${bg}">${initials}</div>
+        <div class="rd-name" title="${s.name}">${s.name}</div>
+        <div class="rd-roll">#${s.id}</div>
+      </div>
+      <div class="rd-num-row">
+        <span class="rd-bignum" id="rdn-${s.id}" style="color:${rdNumColor(val)}">${val}</span>
+        <span class="rd-unit">min</span>
+      </div>
+      <input class="rd-slider" type="range" min="0" max="120" step="5" value="${val}"
+        id="rds-${s.id}" oninput="updateRdCard(${s.id},+this.value)">
+      <div class="rd-goal-bar-wrap">
+        <div class="rd-goal-bar" id="rdgb-${s.id}" style="width:${Math.min(100,Math.round(val/rdGoal*100))}%;background:${rdBarColor(val)}"></div>
+      </div>
+      <div class="rd-goal-txt" id="rdgt-${s.id}" style="color:${rdBarColor(val)}">${rdGoalText(val)}</div>
+      <div class="rd-quick">
+        ${QUICK_VALS.map(q=>`<button class="rd-qb${val===q?' sel':''}" id="rdq-${s.id}-${q}" onclick="updateRdCard(${s.id},${q})">${q}</button>`).join('')}
+      </div>
+      <div class="rd-manual">
+        <span style="font-size:11px;color:var(--ink4);white-space:nowrap">Custom:</span>
+        <input class="rd-minp" type="number" min="0" max="300" placeholder="0" value="${val||''}"
+          id="rdm-${s.id}" oninput="updateRdCard(${s.id},+this.value||0)">
+        <span style="font-size:11px;color:var(--ink4)">min</span>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function rdCardClass(v){
+  if(!v)return 'st-zero';
+  if(v>=rdGoal)return 'st-met';
+  if(v>=rdGoal*0.5)return 'st-half';
+  return 'st-low';
+}
+function rdNumColor(v){
+  if(!v)return 'var(--ink4)';
+  if(v>=rdGoal)return 'var(--green)';
+  if(v>=rdGoal*0.5)return 'var(--amber)';
+  return 'var(--red)';
+}
+function rdBarColor(v){
+  if(v>=rdGoal)return 'var(--green)';
+  if(v>=rdGoal*0.5)return 'var(--amber)';
+  return 'var(--red)';
+}
+function rdGoalText(v){
+  if(!v)return 'Not marked';
+  if(v>=rdGoal)return '✅ Goal met! ('+rdGoal+' min)';
+  return (rdGoal-v)+' min to goal';
+}
+function updateRdCard(sid,val){
+  val=Math.max(0,Math.min(300,val));
+  rdMins[sid]=val;
+  // update number
+  const numEl=document.getElementById('rdn-'+sid);
+  if(numEl){numEl.textContent=val;numEl.style.color=rdNumColor(val);}
+  // update slider
+  const slEl=document.getElementById('rds-'+sid);
+  if(slEl)slEl.value=Math.min(120,val);
+  // update manual input
+  const manEl=document.getElementById('rdm-'+sid);
+  if(manEl&&document.activeElement!==manEl)manEl.value=val||'';
+  // update goal bar
+  const pct=Math.min(100,Math.round(val/rdGoal*100));
+  const gbEl=document.getElementById('rdgb-'+sid);
+  if(gbEl){gbEl.style.width=pct+'%';gbEl.style.background=rdBarColor(val);}
+  // update goal text
+  const gtEl=document.getElementById('rdgt-'+sid);
+  if(gtEl){gtEl.textContent=rdGoalText(val);gtEl.style.color=rdBarColor(val)||'var(--ink4)';}
+  // update card class
+  const card=document.getElementById('rdc-'+sid);
+  if(card)card.className='rd-stu-card '+rdCardClass(val);
+  // update quick buttons
+  QUICK_VALS.forEach(q=>{
+    const qb=document.getElementById(`rdq-${sid}-${q}`);
+    if(qb)qb.className='rd-qb'+(val===q?' sel':'');
+  });
+}
+
+function setAllReading(){
+  const v=parseInt(document.getElementById('rdBulkMins').value)||0;
+  students.forEach(s=>updateRdCard(s.id,v));
+}
+function clearAllReading(){
+  students.forEach(s=>updateRdCard(s.id,0));
+}
+function saveReading(){
+  const date=document.getElementById('rdDate').value;
+  const book=document.getElementById('rdBook').value.trim();
+  if(!date){toast('⚠️ Select date');return;}
+  if(!students.length){toast('⚠️ Add students first');return;}
+  const hasData=Object.values(rdMins).some(v=>v>0);
+  if(!hasData){toast('⚠️ Mark at least one student\'s minutes');return;}
+  reading=reading.filter(r=>r.date!==date);
+  reading.unshift({date,book,mins:{...rdMins}});
+  reading.sort((a,b)=>b.date.localeCompare(a.date));
+  sv('reading',reading);
+  rdMins={};
+  renderRdEntryGrid();
+  renderRdHistory();
+  renderRdLeaderboard();
+  updateRdDateFilter();
+  updateDash();
+  toast('✅ Reading log saved for '+date);
+}
+function saveRdGoal(){
+  const v=parseInt(document.getElementById('rdGoal').value)||20;
+  rdGoal=v;sv('rdGoal',rdGoal);
+  updateRdGoalDisplay();
+  toast('✅ Goal set: '+v+' min/day');
+}
+function updateRdGoalDisplay(){
+  const el=document.getElementById('rdGoalDisplay');
+  if(el)el.textContent='Current goal: '+rdGoal+' minutes per day';
+  const inp=document.getElementById('rdGoal');
+  if(inp)inp.value=rdGoal;
+}
+function updateRdDateFilter(){
+  const el=document.getElementById('rdDateFilter');
+  if(!el)return;
+  const dates=[...new Set(reading.map(r=>r.date))].sort().reverse();
+  el.innerHTML='<option value="">All Dates</option>'+dates.map(d=>`<option value="${d}">${d}</option>`).join('');
+}
+function renderRdHistory(){
+  updateRdDateFilter();
+  const stuFilter=document.getElementById('rdFilter')?.value;
+  const dateFilter=document.getElementById('rdDateFilter')?.value;
+  const el=document.getElementById('rdHistory');
+  if(!reading.length){el.innerHTML='<div class="empty"><div class="empty-msg">No reading records yet.</div></div>';return;}
+  let logs=reading;
+  if(dateFilter)logs=logs.filter(r=>r.date===dateFilter);
+  if(!logs.length){el.innerHTML='<div class="empty"><div class="empty-msg">No records for selected date.</div></div>';return;}
+  const COLORS=['#4f46e5','#7c3aed','#0891b2','#16a34a','#d97706','#db2777','#dc2626','#0284c7'];
+  el.innerHTML=logs.map(r=>{
+    const stuToShow=stuFilter?students.filter(s=>s.id==stuFilter):students;
+    const dayTotal=stuToShow.reduce((a,s)=>a+(r.mins[s.id]||0),0);
+    const avg=stuToShow.length?(dayTotal/stuToShow.length).toFixed(1):'0';
+    return `<div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+        <div>
+          <span style="font-weight:700;font-size:13px;color:var(--ink2)">📅 ${r.date}</span>
+          ${r.book?`<span style="font-size:11px;color:var(--ink4);margin-left:8px">📖 ${r.book}</span>`:''}
+        </div>
+        <div style="display:flex;gap:12px;font-size:11px;font-weight:600">
+          <span style="color:var(--indigo)">Total: ${dayTotal} min</span>
+          <span style="color:var(--ink3)">Avg: ${avg} min</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:6px">
+        ${stuToShow.map((s,i)=>{
+          const mins=r.mins[s.id]||0;
+          const pct=Math.min(100,Math.round(mins/rdGoal*100));
+          const col=mins>=rdGoal?'var(--green)':mins>=rdGoal*0.5?'var(--amber)':'var(--red)';
+          const bg=COLORS[i%COLORS.length];
+          return `<div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--r-xs);padding:7px 9px">
+            <div style="width:28px;height:28px;border-radius:50%;background:${bg}18;color:${bg};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">${s.name[0]}</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:11px;font-weight:500;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:3px">
+                <div style="flex:1;background:var(--border);border-radius:20px;height:4px;overflow:hidden"><div style="width:${pct}%;height:4px;border-radius:20px;background:${col};transition:.3s"></div></div>
+                <span style="font-size:10px;font-weight:700;color:${col};min-width:30px">${mins}m</span>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+function renderRdLeaderboard(){
+  const el=document.getElementById('rdLeaderboard');
+  if(!reading.length||!students.length){el.innerHTML='<div class="empty"><div class="empty-msg">No data yet.</div></div>';return;}
+  const totals=students.map(s=>{
+    const total=reading.reduce((a,r)=>a+(r.mins[s.id]||0),0);
+    const days=reading.filter(r=>(r.mins[s.id]||0)>0).length;
+    const avg=days?Math.round(total/days):0;
+    const goalDays=reading.filter(r=>(r.mins[s.id]||0)>=rdGoal).length;
+    return {s,total,days,avg,goalDays};
+  }).sort((a,b)=>b.total-a.total);
+  const MEDAL=['🥇','🥈','🥉'];
+  const COLORS=['#4f46e5','#7c3aed','#0891b2','#16a34a','#d97706','#db2777','#dc2626','#0284c7'];
+  const maxTotal=totals[0]?.total||1;
+  el.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px">` +
+    totals.map((row,i)=>{
+      const pct=Math.round(row.total/maxTotal*100);
+      const bg=COLORS[i%COLORS.length];
+      const goalPct=reading.length?Math.round(row.goalDays/reading.length*100):0;
+      return `<div style="display:flex;align-items:center;gap:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;transition:.15s">
+        <div style="font-size:${i<3?'20px':'14px'};font-weight:700;width:28px;text-align:center;${i>=3?'color:var(--ink4)':''}">${i<3?MEDAL[i]:i+1}</div>
+        <div style="width:34px;height:34px;border-radius:50%;background:${bg}20;color:${bg};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">${row.s.name[0]}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;color:var(--ink2)">${row.s.name}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+            <div style="flex:1;background:var(--border);border-radius:20px;height:6px;overflow:hidden"><div style="width:${pct}%;height:6px;border-radius:20px;background:${bg};transition:.4s"></div></div>
+          </div>
+          <div style="font-size:10px;color:var(--ink4);margin-top:3px">${row.days} day(s) read · Avg ${row.avg} min/day · Goal met ${row.goalDays}/${reading.length} days</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:${bg}">${row.total}</div>
+          <div style="font-size:10px;color:var(--ink4)">total min</div>
+          <div style="font-size:10px;font-weight:600;color:${goalPct>=80?'var(--green)':goalPct>=50?'var(--amber)':'var(--red)'}">${goalPct}% goal</div>
+        </div>
+      </div>`;
+    }).join('')+`</div>`;
+}
+
+init();
+</script>
+</body>
+</html>
